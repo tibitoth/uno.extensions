@@ -36,8 +36,10 @@ public sealed partial class App : Application
 		var host = UnoHost
 					.CreateDefaultBuilder()
 					.UseConfiguration(
-						configureHostConfiguration: (builder) => builder.EmbeddedSource<App>("locale", false)
-					)
+						configureHostConfiguration: (builder) =>
+							builder.AddEmbeddedConfiguration<App>(
+								hostingContext: null,
+								configurationName: "locale"))
 					.UseLocalization()
 					.Build();
 		var locals = host.Services.GetServices<IServiceInitialize>();
