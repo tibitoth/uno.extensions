@@ -35,7 +35,9 @@ public sealed partial class App : Application
 		// tests to work when app is restarted
 		var host = UnoHost
 					.CreateDefaultBuilder()
-					.UseConfiguration()
+					.UseConfiguration(
+						configureHostConfiguration: (builder) => builder.EmbeddedSource<App>("locale", false)
+					)
 					.UseLocalization()
 					.Build();
 		var locals = host.Services.GetServices<IServiceInitialize>();
